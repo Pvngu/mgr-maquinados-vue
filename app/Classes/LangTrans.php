@@ -146,6 +146,7 @@ class LangTrans
             'suppliers' => 'Suppliers',
             'products' => 'Products',
             'clients' => 'Clients',
+            'orders' => 'Orders',
         ],
         'dashboard' => [
             'dashboard' => 'Dashboard',
@@ -582,6 +583,19 @@ class LangTrans
             'email' => 'Email',
             'phone' => 'Phone',
             'address' => 'Address',
+        ],
+        'orders' => [
+            'add' => 'Add New Order',
+            'edit' => 'Edit Order',
+            'created' => 'Order Created Successfully',
+            'updated' => 'Order Updated Successfully',
+            'deleted' => 'Order Deleted Successfully',
+            'delete_message' => 'Are you sure you want to delete this order?',
+            'selected_delete_message' => 'Are you sure you want to delete selected orders?',
+            'client_id' => 'Client',
+            'order_date' => 'Order Date',
+            'total_amount' => 'Total Amount',
+            'user_id' => 'User',
         ],
     ];
 

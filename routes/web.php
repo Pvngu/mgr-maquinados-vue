@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\SupplierController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ClientController;
+use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\OrderItemController;
 
 // Admin Routes
 ApiRoute::group(['namespace' => 'App\Http\Controllers\Api'], function () {
@@ -87,5 +89,7 @@ ApiRoute::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         ApiRoute::resource('suppliers', SupplierController::class, $options);
         ApiRoute::resource('products', ProductController::class, $options);
         ApiRoute::resource('clients', ClientController::class, $options);
+        ApiRoute::resource('orders', OrderController::class, $options);
+        ApiRoute::resource('order_items', OrderItemController::class, $options);
     });
 });

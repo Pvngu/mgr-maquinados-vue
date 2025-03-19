@@ -260,6 +260,23 @@
                         <span>{{ $t("menu.products") }}</span>
                     </a-menu-item>
 
+                    <a-menu-item
+                        v-if="
+                            permsArray.includes('orders_view') ||
+                            permsArray.includes('admin')
+                        "
+                        @click="
+                            () => {
+                                menuSelected();
+                                $router.push({ name: 'admin.orders.index' });
+                            }
+                        "
+                        key="orders"
+                    >
+                        <ShoppingCartOutlined />
+                        <span>{{ $t("menu.orders") }}</span>
+                    </a-menu-item>
+
                     <component
                         v-for="(appModule, index) in appModules"
                         :key="index"

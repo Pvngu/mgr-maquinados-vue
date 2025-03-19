@@ -232,6 +232,24 @@ class PermsSeed
             'name' => 'clients_delete',
             'display_name' => 'Clients Delete'
         ],
+
+        // Orders
+        'orders_view' => [
+            'name' => 'orders_view',
+            'display_name' => 'Orders View'
+        ],
+        'orders_create' => [
+            'name' => 'orders_create',
+            'display_name' => 'Orders Create'
+        ],
+        'orders_edit' => [
+            'name' => 'orders_edit',
+            'display_name' => 'Orders Edit'
+        ],
+        'orders_delete' => [
+            'name' => 'orders_delete',
+            'display_name' => 'Orders Delete'
+        ],
     ];
 
     public static $eStorePermissions = [];
