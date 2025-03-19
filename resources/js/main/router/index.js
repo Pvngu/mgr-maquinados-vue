@@ -12,6 +12,7 @@ import FormRoutes from './forms';
 import SettingRoutes from './settings';
 import SetupAppRoutes from './setupApp';
 import CategoriesRoutes from './categories';
+import SuppliersRoutes from './suppliers';
 import { checkUserPermission } from '../../common/scripts/functions';
 
 const appType = window.config.app_type;
@@ -51,6 +52,7 @@ const router = createRouter({
         ...MessagingRoutes,
         ...FormRoutes,
         ...CategoriesRoutes,
+        ...SuppliersRoutes,
     ],
     scrollBehavior: () => ({ left: 0, top: 0 }),
 });

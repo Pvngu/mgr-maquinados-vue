@@ -4,6 +4,7 @@ use Examyou\RestAPI\Facades\ApiRoute;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Broadcasting\BroadcastController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\SupplierController;
 
 // Admin Routes
 ApiRoute::group(['namespace' => 'App\Http\Controllers\Api'], function () {
@@ -81,5 +82,6 @@ ApiRoute::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         ApiRoute::get('select-options/{group}', ['as' => 'api.select-options.group', 'uses' => 'SelectOptionController@getGroupOptions']);
         
         ApiRoute::resource('categories', CategoryController::class, $options);
+        ApiRoute::resource('suppliers', SupplierController::class, $options);
     });
 });

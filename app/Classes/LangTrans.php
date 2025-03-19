@@ -142,6 +142,7 @@ class LangTrans
             'form_field_names' => 'Lead Table Fields',
             'templates' => 'Templates',
             'categories' => 'Categories',
+            'suppliers' => 'Suppliers',
         ],
         'dashboard' => [
             'dashboard' => 'Dashboard',
@@ -540,6 +541,15 @@ class LangTrans
             'deleted' => 'Category Deleted Successfully',
             'delete_message' => 'Are you sure you want to delete this category?',
             'selected_delete_message' => 'Are you sure you want to delete selected categories?',
+        ],
+        'suppliers' => [
+            'add' => 'Add New Supplier',
+            'edit' => 'Edit Supplier',
+            'created' => 'Supplier Created Successfully',
+            'updated' => 'Supplier Updated Successfully',
+            'deleted' => 'Supplier Deleted Successfully',
+            'delete_message' => 'Are you sure you want to delete this supplier?',
+            'selected_delete_message' => 'Are you sure you want to delete selected suppliers?',
         ],
     ];
 
