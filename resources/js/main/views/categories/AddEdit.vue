@@ -12,7 +12,7 @@
             <a-row>
                 <a-col :xs="24" :sm="24" :md="24" :lg="24">
                     <a-row :gutter="16">
-                        <a-col :xs="24" :sm="24" :md="12" :lg="12">
+                        <a-col :xs="24" :sm="24" :md="24" :lg="24">
                             <a-form-item
                                 :label="$t('common.name')"
                                 name="name"
@@ -26,7 +26,9 @@
                                 />
                             </a-form-item>
                         </a-col>
-                        <a-col :xs="24" :sm="24" :md="12" :lg="12">
+                    </a-row>
+                    <a-row :gutter="16">
+                        <a-col :xs="24" :sm="24" :md="24" :lg="24">
                             <a-form-item
                                 :label="$t('common.description')"
                                 name="description"

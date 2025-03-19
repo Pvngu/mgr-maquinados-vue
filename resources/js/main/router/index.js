@@ -13,6 +13,7 @@ import SettingRoutes from './settings';
 import SetupAppRoutes from './setupApp';
 import CategoriesRoutes from './categories';
 import SuppliersRoutes from './suppliers';
+import ProductsRoutes from './products';
 import { checkUserPermission } from '../../common/scripts/functions';
 
 const appType = window.config.app_type;
@@ -53,6 +54,7 @@ const router = createRouter({
         ...FormRoutes,
         ...CategoriesRoutes,
         ...SuppliersRoutes,
+        ...ProductsRoutes,
     ],
     scrollBehavior: () => ({ left: 0, top: 0 }),
 });

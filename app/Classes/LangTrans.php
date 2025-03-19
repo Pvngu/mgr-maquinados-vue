@@ -143,6 +143,7 @@ class LangTrans
             'templates' => 'Templates',
             'categories' => 'Categories',
             'suppliers' => 'Suppliers',
+            'products' => 'Products',
         ],
         'dashboard' => [
             'dashboard' => 'Dashboard',
@@ -550,6 +551,15 @@ class LangTrans
             'deleted' => 'Supplier Deleted Successfully',
             'delete_message' => 'Are you sure you want to delete this supplier?',
             'selected_delete_message' => 'Are you sure you want to delete selected suppliers?',
+        ],
+        'products' => [
+            'add' => 'Add New Product',
+            'edit' => 'Edit Product',
+            'created' => 'Product Created Successfully',
+            'updated' => 'Product Updated Successfully',
+            'deleted' => 'Product Deleted Successfully',
+            'delete_message' => 'Are you sure you want to delete this product?',
+            'selected_delete_message' => 'Are you sure you want to delete selected products?',
         ],
     ];
 

@@ -196,6 +196,24 @@ class PermsSeed
             'name' => 'suppliers_delete',
             'display_name' => 'Suppliers Delete'
         ],
+
+        // Products
+        'products_view' => [
+            'name' => 'products_view',
+            'display_name' => 'Products View'
+        ],
+        'products_create' => [
+            'name' => 'products_create',
+            'display_name' => 'Products Create'
+        ],
+        'products_edit' => [
+            'name' => 'products_edit',
+            'display_name' => 'Products Edit'
+        ],
+        'products_delete' => [
+            'name' => 'products_delete',
+            'display_name' => 'Products Delete'
+        ],
     ];
 
     public static $eStorePermissions = [];

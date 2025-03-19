@@ -226,6 +226,23 @@
                         <span>{{ $t("menu.suppliers") }}</span>
                     </a-menu-item>
 
+                    <a-menu-item
+                        v-if="
+                            permsArray.includes('products_view') ||
+                            permsArray.includes('admin')
+                        "
+                        @click="
+                            () => {
+                                menuSelected();
+                                $router.push({ name: 'admin.products.index' });
+                            }
+                        "
+                        key="products"
+                    >
+                        <AppstoreOutlined />
+                        <span>{{ $t("menu.products") }}</span>
+                    </a-menu-item>
+
                     <component
                         v-for="(appModule, index) in appModules"
                         :key="index"
