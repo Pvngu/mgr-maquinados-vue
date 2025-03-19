@@ -14,6 +14,7 @@ import SetupAppRoutes from './setupApp';
 import CategoriesRoutes from './categories';
 import SuppliersRoutes from './suppliers';
 import ProductsRoutes from './products';
+import ClientsRoutes from './clients';
 import { checkUserPermission } from '../../common/scripts/functions';
 
 const appType = window.config.app_type;
@@ -55,6 +56,7 @@ const router = createRouter({
         ...CategoriesRoutes,
         ...SuppliersRoutes,
         ...ProductsRoutes,
+        ...ClientsRoutes,
     ],
     scrollBehavior: () => ({ left: 0, top: 0 }),
 });

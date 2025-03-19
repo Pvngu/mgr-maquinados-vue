@@ -6,6 +6,7 @@ use Illuminate\Broadcasting\BroadcastController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\SupplierController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\ClientController;
 
 // Admin Routes
 ApiRoute::group(['namespace' => 'App\Http\Controllers\Api'], function () {
@@ -85,5 +86,6 @@ ApiRoute::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         ApiRoute::resource('categories', CategoryController::class, $options);
         ApiRoute::resource('suppliers', SupplierController::class, $options);
         ApiRoute::resource('products', ProductController::class, $options);
+        ApiRoute::resource('clients', ClientController::class, $options);
     });
 });

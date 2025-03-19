@@ -116,6 +116,7 @@ class LangTrans
             'include_all_as_default' => '(Include All As Default)',
             'export_table' => 'Export {0}',
             'export_as' => 'Export As',
+            'address' => 'Address',
         ],
         'menu' => [
             'dashboard' => 'Dashboard',
@@ -144,6 +145,7 @@ class LangTrans
             'categories' => 'Categories',
             'suppliers' => 'Suppliers',
             'products' => 'Products',
+            'clients' => 'Clients',
         ],
         'dashboard' => [
             'dashboard' => 'Dashboard',
@@ -567,6 +569,19 @@ class LangTrans
             'stock_quantity' => 'Stock Quantity',
             'initial_stock_quantity' => 'Initial Stock Quantity',
             'category' => 'Category',
+        ],
+        'clients' => [
+            'add' => 'Add New Client',
+            'edit' => 'Edit Client',
+            'created' => 'Client Created Successfully',
+            'updated' => 'Client Updated Successfully',
+            'deleted' => 'Client Deleted Successfully',
+            'delete_message' => 'Are you sure you want to delete this client?',
+            'selected_delete_message' => 'Are you sure you want to delete selected clients?',
+            'name' => 'Name',
+            'email' => 'Email',
+            'phone' => 'Phone',
+            'address' => 'Address',
         ],
     ];
 

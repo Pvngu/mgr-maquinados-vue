@@ -113,6 +113,23 @@
                         <span>{{ $t("menu.staff_members") }}</span>
                     </a-menu-item>
 
+                    <a-menu-item
+                        v-if="
+                            permsArray.includes('clients_view') ||
+                            permsArray.includes('admin')
+                        "
+                        @click="
+                            () => {
+                                menuSelected();
+                                $router.push({ name: 'admin.clients.index' });
+                            }
+                        "
+                        key="clients"
+                    >
+                        <UserOutlined />
+                        <span>{{ $t("menu.clients") }}</span>
+                    </a-menu-item>
+
                     <!-- <LeftSideBarMainHeading
                         :title="$t('menu.')"
                         :visible="menuCollapsed"
