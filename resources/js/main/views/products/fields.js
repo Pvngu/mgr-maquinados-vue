@@ -53,8 +53,8 @@ const fields = () => {
             value: t("common.name"),
         },
         {
-            key: "category_id",
-            value: t("common.category"),
+            key: "description",
+            value: t("common.description"),
         },
     ];
 

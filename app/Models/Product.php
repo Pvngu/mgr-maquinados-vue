@@ -15,7 +15,9 @@ class Product extends BaseModel
 
     protected $appends = ['xid', 'x_category_id'];
 
-    protected $filterable = [];
+    protected $filterable = [
+        'name', 'description'
+    ];
 
     protected $hashableGetterFunctions = [
         'getXCategoryIdAttribute' => 'category_id',

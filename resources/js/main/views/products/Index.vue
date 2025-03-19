@@ -70,6 +70,27 @@
                         bordered
                         size="middle"
                     >
+                        <template #title>
+                            <a-row justify="end" align="center" class="table-header">
+                                <a-col 
+                                    :xs="21"
+                                    :sm="16"
+                                    :md="16"
+                                    :lg="12"
+                                    :xl="8"
+                                >
+                                    <a-input-search
+                                        style="width: 100%"
+                                        v-model:value="table.searchString"
+                                        :placeholder="$t('common.search')"
+                                        show-search
+                                        @search="onTableSearch"
+                                        @change="onTableSearch"
+                                        :loading="table.loading"
+                                    />
+                                </a-col>
+                            </a-row>
+                        </template>
                         <template #bodyCell="{ column, record }">
                             <template v-if="column.dataIndex === 'action'">
                                 <a-button
