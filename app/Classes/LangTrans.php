@@ -551,6 +551,9 @@ class LangTrans
             'deleted' => 'Supplier Deleted Successfully',
             'delete_message' => 'Are you sure you want to delete this supplier?',
             'selected_delete_message' => 'Are you sure you want to delete selected suppliers?',
+            'contact_name' => 'Contact Name',
+            'contact_email' => 'Contact Email',
+            'contact_phone' => 'Contact Phone',
         ],
         'products' => [
             'add' => 'Add New Product',
@@ -560,6 +563,10 @@ class LangTrans
             'deleted' => 'Product Deleted Successfully',
             'delete_message' => 'Are you sure you want to delete this product?',
             'selected_delete_message' => 'Are you sure you want to delete selected products?',
+            'price' => 'Price',
+            'stock_quantity' => 'Stock Quantity',
+            'initial_stock_quantity' => 'Initial Stock Quantity',
+            'category' => 'Category',
         ],
     ];
 

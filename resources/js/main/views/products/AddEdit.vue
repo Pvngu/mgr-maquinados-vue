@@ -44,7 +44,7 @@
                     <a-row :gutter="16">
                         <a-col :xs="24" :sm="24" :md="12" :lg="12">
                             <a-form-item
-                                :label="$t('common.price')"
+                                :label="$t('products.price')"
                                 name="price"
                                 :help="rules.price ? rules.price.message : null"
                                 :validateStatus="rules.price ? 'error' : null"
@@ -52,14 +52,14 @@
                             >
                                 <a-input-number
                                     v-model:value="formData.price"
-                                    :placeholder="$t('common.placeholder_default_text', [$t('common.price')])"
+                                    :placeholder="$t('common.placeholder_default_text', [$t('products.price')])"
                                     style="width: 100%"
                                 />
                             </a-form-item>
                         </a-col>
                         <a-col :xs="24" :sm="24" :md="12" :lg="12">
                             <a-form-item
-                                :label="$t('common.stock_quantity')"
+                                :label="$t('products.stock_quantity')"
                                 name="stock_quantity"
                                 :help="rules.stock_quantity ? rules.stock_quantity.message : null"
                                 :validateStatus="rules.stock_quantity ? 'error' : null"
@@ -67,7 +67,7 @@
                             >
                                 <a-input-number
                                     v-model:value="formData.stock_quantity"
-                                    :placeholder="$t('common.placeholder_default_text', [$t('common.stock_quantity')])"
+                                    :placeholder="$t('common.placeholder_default_text', [$t('products.stock_quantity')])"
                                     style="width: 100%"
                                 />
                             </a-form-item>
@@ -76,7 +76,7 @@
                     <a-row :gutter="16">
                         <a-col :xs="24" :sm="24" :md="12" :lg="12">
                             <a-form-item
-                                :label="$t('common.initial_stock_quantity')"
+                                :label="$t('products.initial_stock_quantity')"
                                 name="initial_stock_quantity"
                                 :help="rules.initial_stock_quantity ? rules.initial_stock_quantity.message : null"
                                 :validateStatus="rules.initial_stock_quantity ? 'error' : null"
@@ -84,14 +84,14 @@
                             >
                                 <a-input-number
                                     v-model:value="formData.initial_stock_quantity"
-                                    :placeholder="$t('common.placeholder_default_text', [$t('common.initial_stock_quantity')])"
+                                    :placeholder="$t('common.placeholder_default_text', [$t('products.initial_stock_quantity')])"
                                     style="width: 100%"
                                 />
                             </a-form-item>
                         </a-col>
                         <a-col :xs="24" :sm="24" :md="12" :lg="12">
                             <a-form-item
-                                :label="$t('common.category')"
+                                :label="$t('products.category')"
                                 name="category_id"
                                 :help="rules.category_id ? rules.category_id.message : null"
                                 :validateStatus="rules.category_id ? 'error' : null"
@@ -99,7 +99,7 @@
                             >
                                 <a-select
                                     v-model:value="formData.category_id"
-                                    :placeholder="$t('common.select_default_text', [$t('common.category')])"
+                                    :placeholder="$t('common.select_default_text', [$t('products.category')])"
                                     show-search
                                     optionFilterProp="title"
                                     style="width: 100%"

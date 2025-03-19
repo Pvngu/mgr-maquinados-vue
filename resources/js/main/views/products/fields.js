@@ -26,19 +26,19 @@ const fields = () => {
             dataIndex: "description",
         },
         {
-            title: t("common.price"),
+            title: t("products.price"),
             dataIndex: "price",
         },
         {
-            title: t("common.stock_quantity"),
+            title: t("products.stock_quantity"),
             dataIndex: "stock_quantity",
         },
         {
-            title: t("common.initial_stock_quantity"),
+            title: t("products.initial_stock_quantity"),
             dataIndex: "initial_stock_quantity",
         },
         {
-            title: t("common.category"),
+            title: t("products.category"),
             dataIndex: "category_id",
         },
         {

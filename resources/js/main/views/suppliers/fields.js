@@ -20,15 +20,15 @@ const fields = () => {
             dataIndex: "name",
         },
         {
-            title: t("common.contact_name"),
+            title: t("suppliers.contact_name"),
             dataIndex: "contact_name",
         },
         {
-            title: t("common.contact_email"),
+            title: t("suppliers.contact_email"),
             dataIndex: "contact_email",
         },
         {
-            title: t("common.contact_phone"),
+            title: t("suppliers.contact_phone"),
             dataIndex: "contact_phone",
         },
         {
@@ -44,7 +44,7 @@ const fields = () => {
         },
         {
             key: "contact_name",
-            value: t("common.contact_name"),
+            value: t("suppliers.contact_name"),
         },
     ];
 

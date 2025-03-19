@@ -26,3 +26,4 @@ yarn-error.log
 __MACOSX/*
 env/
 __pycache__/
+.github

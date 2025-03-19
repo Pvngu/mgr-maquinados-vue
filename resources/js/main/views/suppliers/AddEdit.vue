@@ -28,7 +28,7 @@
                         </a-col>
                         <a-col :xs="24" :sm="24" :md="12" :lg="12">
                             <a-form-item
-                                :label="$t('common.contact_name')"
+                                :label="$t('suppliers.contact_name')"
                                 name="contact_name"
                                 :help="rules.contact_name ? rules.contact_name.message : null"
                                 :validateStatus="rules.contact_name ? 'error' : null"
@@ -36,7 +36,7 @@
                             >
                                 <a-input
                                     v-model:value="formData.contact_name"
-                                    :placeholder="$t('common.placeholder_default_text', [$t('common.contact_name')])"
+                                    :placeholder="$t('common.placeholder_default_text', [$t('suppliers.contact_name')])"
                                 />
                             </a-form-item>
                         </a-col>
@@ -44,27 +44,27 @@
                     <a-row :gutter="16">
                         <a-col :xs="24" :sm="24" :md="12" :lg="12">
                             <a-form-item
-                                :label="$t('common.contact_email')"
+                                :label="$t('suppliers.contact_email')"
                                 name="contact_email"
                                 :help="rules.contact_email ? rules.contact_email.message : null"
                                 :validateStatus="rules.contact_email ? 'error' : null"
                             >
                                 <a-input
                                     v-model:value="formData.contact_email"
-                                    :placeholder="$t('common.placeholder_default_text', [$t('common.contact_email')])"
+                                    :placeholder="$t('common.placeholder_default_text', [$t('suppliers.contact_email')])"
                                 />
                             </a-form-item>
                         </a-col>
                         <a-col :xs="24" :sm="24" :md="12" :lg="12">
                             <a-form-item
-                                :label="$t('common.contact_phone')"
+                                :label="$t('suppliers.contact_phone')"
                                 name="contact_phone"
                                 :help="rules.contact_phone ? rules.contact_phone.message : null"
                                 :validateStatus="rules.contact_phone ? 'error' : null"
                             >
                                 <a-input
                                     v-model:value="formData.contact_phone"
-                                    :placeholder="$t('common.placeholder_default_text', [$t('common.contact_phone')])"
+                                    :placeholder="$t('common.placeholder_default_text', [$t('suppliers.contact_phone')])"
                                 />
                             </a-form-item>
                         </a-col>
