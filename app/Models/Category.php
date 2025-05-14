@@ -11,6 +11,8 @@ class Category extends BaseModel
 
     protected $table = 'categories';
 
+    protected $default = ['xid','name'];
+
     protected $hidden = ['id'];
 
     protected $appends = ['xid'];

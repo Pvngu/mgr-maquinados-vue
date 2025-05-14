@@ -93,6 +93,9 @@
                             </a-row>
                         </template>
                         <template #bodyCell="{ column, record }">
+                            <template v-if="column.dataIndex === 'category'">
+                                {{ record.category ? record.category.name : "" }}
+                            </template>
                             <template v-if="column.dataIndex === 'action'">
                                 <a-button
                                     v-if="
