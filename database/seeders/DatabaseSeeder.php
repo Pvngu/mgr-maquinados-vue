@@ -13,16 +13,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        if (env('APP_ENV') == 'testing') {
-            $this->call(LangTableSeeder::class);
-            $this->call(CompanyTableSeeder::class);
-            $this->call(CurrencyTableSeeder::class);
-            $this->call(RolesTableSeeder::class);
-            $this->call(UsersTableSeeder::class);
-            $this->call(SettingTableSeeder::class);
-            $this->call(FormFieldNamesTableSeeder::class);
-            $this->call(EmailTemplatesTableSeeder::class);
-            $this->call(FormsTableSeeder::class);
-        }
+        // if (env('APP_ENV') == 'testing') {
+        //     $this->call(LangTableSeeder::class);
+        //     $this->call(CompanyTableSeeder::class);
+        //     $this->call(CurrencyTableSeeder::class);
+        //     $this->call(RolesTableSeeder::class);
+        //     $this->call(UsersTableSeeder::class);
+        //     $this->call(SettingTableSeeder::class);
+        //     $this->call(FormFieldNamesTableSeeder::class);
+        //     $this->call(EmailTemplatesTableSeeder::class);
+        //     $this->call(FormsTableSeeder::class);
+        // }
+        // Seed main tables
+        $this->call([
+            CategorySeeder::class,
+            ProductSeeder::class,
+            ClientSeeder::class,
+            SupplierSeeder::class,
+        ]);
     }
 }
