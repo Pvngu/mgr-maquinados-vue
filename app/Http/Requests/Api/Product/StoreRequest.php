@@ -19,7 +19,7 @@ class StoreRequest extends BaseRequest
             'price' => 'required|numeric|min:0',
             'stock_quantity' => 'required|integer|min:0',
             'initial_stock_quantity' => 'required|integer|min:0',
-            'category_id' => 'required|exists:categories,id',
+            'category_id' => 'required',
         ];
     }
 }

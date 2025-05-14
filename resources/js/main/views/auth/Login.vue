@@ -2,7 +2,7 @@
     <main class="login-container">
         <a-card style="max-width: 420px; margin: 0 auto;" :title="null">
             <div class="card-header">
-                <img class="left-image" src="/images/login_background.png" />
+                <img width="90" class="left-image" src="/images/light.png" />
             </div>
             <a-form layout="vertical">
                 <a-row>

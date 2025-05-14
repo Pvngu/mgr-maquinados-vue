@@ -56,6 +56,7 @@
             :data="viewData"
             :pageTitle="pageTitle"
             :successMessage="successMessage"
+            :categories="categories"
         />
         <a-row class="mt-5">
             <a-col :span="24">
@@ -154,6 +155,8 @@ export default {
             columns,
             filterableColumns,
             hashableColumns,
+            getPrefetchData,
+            categories
         } = fields();
         const { permsArray } = common();
         const crudVariables = crud();
@@ -166,7 +169,9 @@ export default {
             crudVariables.initData.value = { ...initData };
             crudVariables.formData.value = { ...initData };
 
-            setUrlData();
+            getPrefetchData().then(() => {
+                setUrlData();
+            })
         });
 
         const setUrlData = () => {
@@ -187,6 +192,7 @@ export default {
             columns,
             filterableColumns,
             setUrlData,
+            categories
         };
     },
 };

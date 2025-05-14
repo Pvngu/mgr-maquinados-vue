@@ -28,13 +28,12 @@
         <div v-else>
             <img
                 :style="{
-                    width: '150px',
-                    height: '53px',
+                    width: '70px',
                     paddingLeft: appSetting.rtl ? '0px' : '20px',
                     paddingRight: appSetting.rtl ? '30px' : '0px',
                     paddingTop: '5px',
                     paddingBottom: '10px',
-                    marginLeft: appSetting.rtl ? '0px' : '10px',
+                    marginLeft: appSetting.rtl ? '0px' : '60px',
                     marginRight: appSetting.rtl ? '10px' : '0px',
                 }"
                 :src="
@@ -84,7 +83,7 @@
                         <span>{{ $t("menu.dashboard") }}</span>
                     </a-menu-item>
 
-                    <LeftSideBarMainHeading
+                    <!-- <LeftSideBarMainHeading
                         v-if="
                             permsArray.includes('users_view') ||
                             permsArray.includes('admin') ||
@@ -94,7 +93,75 @@
                         "
                         :title="$t('menu.user_management')"
                         :visible="menuCollapsed"
-                    />
+                    /> -->
+
+                    <a-menu-item
+                        v-if="
+                            permsArray.includes('categories_view') ||
+                            permsArray.includes('admin')
+                        "
+                        @click="
+                            () => {
+                                menuSelected();
+                                $router.push({ name: 'admin.categories.index' });
+                            }
+                        "
+                        key="categories"
+                    >
+                        <AppstoreOutlined />
+                        <span>{{ $t("menu.categories") }}</span>
+                    </a-menu-item>
+
+                    <a-menu-item
+                        v-if="
+                            permsArray.includes('products_view') ||
+                            permsArray.includes('admin')
+                        "
+                        @click="
+                            () => {
+                                menuSelected();
+                                $router.push({ name: 'admin.products.index' });
+                            }
+                        "
+                        key="products"
+                    >
+                        <AppstoreOutlined />
+                        <span>{{ $t("menu.products") }}</span>
+                    </a-menu-item>
+
+                    <a-menu-item
+                        v-if="
+                            permsArray.includes('suppliers_view') ||
+                            permsArray.includes('admin')
+                        "
+                        @click="
+                            () => {
+                                menuSelected();
+                                $router.push({ name: 'admin.suppliers.index' });
+                            }
+                        "
+                        key="suppliers"
+                    >
+                        <AppstoreOutlined />
+                        <span>{{ $t("menu.suppliers") }}</span>
+                    </a-menu-item>
+
+                    <a-menu-item
+                        v-if="
+                            permsArray.includes('orders_view') ||
+                            permsArray.includes('admin')
+                        "
+                        @click="
+                            () => {
+                                menuSelected();
+                                $router.push({ name: 'admin.orders.index' });
+                            }
+                        "
+                        key="orders"
+                    >
+                        <ShoppingCartOutlined />
+                        <span>{{ $t("menu.orders") }}</span>
+                    </a-menu-item>
 
                     <a-menu-item
                         v-if="
@@ -140,7 +207,7 @@
                         :visible="menuCollapsed"
                     />
 
-                    <a-menu-item
+                    <!-- <a-menu-item
                         v-if="
                             permsArray.includes('form_field_names_view') ||
                             permsArray.includes('admin')
@@ -157,9 +224,9 @@
                     >
                         <InsertRowBelowOutlined />
                         <span>{{ $t("menu.form_field_names") }}</span>
-                    </a-menu-item>
+                    </a-menu-item> -->
 
-                    <a-sub-menu
+                    <!-- <a-sub-menu
                         key="messaging"
                         v-if="
                             permsArray.includes('email_templates_view') ||
@@ -207,75 +274,7 @@
                     >
                         <FolderOpenOutlined />
                         <span>{{ $t("menu.forms") }}</span>
-                    </a-menu-item>
-
-                    <a-menu-item
-                        v-if="
-                            permsArray.includes('categories_view') ||
-                            permsArray.includes('admin')
-                        "
-                        @click="
-                            () => {
-                                menuSelected();
-                                $router.push({ name: 'admin.categories.index' });
-                            }
-                        "
-                        key="categories"
-                    >
-                        <AppstoreOutlined />
-                        <span>{{ $t("menu.categories") }}</span>
-                    </a-menu-item>
-
-                    <a-menu-item
-                        v-if="
-                            permsArray.includes('suppliers_view') ||
-                            permsArray.includes('admin')
-                        "
-                        @click="
-                            () => {
-                                menuSelected();
-                                $router.push({ name: 'admin.suppliers.index' });
-                            }
-                        "
-                        key="suppliers"
-                    >
-                        <AppstoreOutlined />
-                        <span>{{ $t("menu.suppliers") }}</span>
-                    </a-menu-item>
-
-                    <a-menu-item
-                        v-if="
-                            permsArray.includes('products_view') ||
-                            permsArray.includes('admin')
-                        "
-                        @click="
-                            () => {
-                                menuSelected();
-                                $router.push({ name: 'admin.products.index' });
-                            }
-                        "
-                        key="products"
-                    >
-                        <AppstoreOutlined />
-                        <span>{{ $t("menu.products") }}</span>
-                    </a-menu-item>
-
-                    <a-menu-item
-                        v-if="
-                            permsArray.includes('orders_view') ||
-                            permsArray.includes('admin')
-                        "
-                        @click="
-                            () => {
-                                menuSelected();
-                                $router.push({ name: 'admin.orders.index' });
-                            }
-                        "
-                        key="orders"
-                    >
-                        <ShoppingCartOutlined />
-                        <span>{{ $t("menu.orders") }}</span>
-                    </a-menu-item>
+                    </a-menu-item> -->
 
                     <component
                         v-for="(appModule, index) in appModules"

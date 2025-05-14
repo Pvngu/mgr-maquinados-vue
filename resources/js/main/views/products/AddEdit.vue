@@ -106,9 +106,9 @@
                                 >
                                     <a-select-option
                                         v-for="category in categories"
-                                        :key="category.id"
+                                        :key="category.xid"
                                         :title="category.name"
-                                        :value="category.id"
+                                        :value="category.xid"
                                     >
                                         {{ category.name }}
                                     </a-select-option>
@@ -158,6 +158,7 @@ export default defineComponent({
         "addEditType",
         "pageTitle",
         "successMessage",
+        "categories"
     ],
     components: {
         PlusOutlined,

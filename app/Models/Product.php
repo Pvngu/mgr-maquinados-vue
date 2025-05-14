@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\BaseModel;
+use App\Casts\Hash;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends BaseModel
@@ -24,7 +25,7 @@ class Product extends BaseModel
     ];
 
     protected $casts = [
-        'category_id' => 'integer',
+        'category_id' => Hash::class . ':hash',
         'price' => 'float',
         'stock_quantity' => 'integer',
         'initial_stock_quantity' => 'integer',

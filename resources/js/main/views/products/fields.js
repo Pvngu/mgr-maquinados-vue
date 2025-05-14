@@ -2,7 +2,7 @@ import { useI18n } from "vue-i18n";
 import { ref } from "vue";
 
 const fields = () => {
-    const url = "products?fields=id,xid,name,description,price,stock_quantity,category_id,initial_stock_quantity";
+    const url = "products?fields=id,xid,name,description,price,stock_quantity,category_id,x_category_id,initial_stock_quantity";
     const addEditUrl = "products";
     const { t } = useI18n();
     const hashableColumns = ["category_id"];
@@ -15,6 +15,15 @@ const fields = () => {
         initial_stock_quantity: 0,
         category_id: undefined,
     };
+
+    const categories = ref([]);
+
+    const getPrefetchData = () => {
+        const categoryPromise = axiosAdmin.get("categories?fields=id,xid,name");
+        return Promise.all([categoryPromise]).then(([categoryResponse]) => {
+            categories.value = categoryResponse.data;
+        });
+    }
 
     const columns = [
         {
@@ -65,6 +74,8 @@ const fields = () => {
         columns,
         filterableColumns,
         hashableColumns,
+        getPrefetchData,
+        categories
     };
 };
 
