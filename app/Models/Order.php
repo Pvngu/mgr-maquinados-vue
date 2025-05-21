@@ -31,7 +31,6 @@ class Order extends BaseModel
     protected $casts = [
         'client_id' => Hash::class . ':hash',
         'user_id' => Hash::class . ':hash',
-        'order_date' => 'date',
         'total_amount' => 'float',
     ];
 

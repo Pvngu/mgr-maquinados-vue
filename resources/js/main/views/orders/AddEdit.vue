@@ -329,7 +329,7 @@ export default defineComponent({
         // Handle form submission
         const onSubmit = () => {
             addEditRequestAdmin({
-                url: props.url + (props.addEditType === "add" ? "" : `/updateItem/${props.formData.xid}`),
+                url: props.url + (props.addEditType === "add" ? "" : `/${props.formData.xid}`),
                 data: props.formData,
                 successMessage: props.successMessage,
                 success: (res) => {
