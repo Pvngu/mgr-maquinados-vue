@@ -20,7 +20,7 @@
                 }"
                 :src="
                     appSetting.left_sidebar_theme == 'dark'
-                        ? appSetting.small_dark_logo_url
+                        ? appSetting.small_light_logo_url
                         : appSetting.small_light_logo_url
                 "
             />
@@ -38,7 +38,7 @@
                 }"
                 :src="
                     appSetting.left_sidebar_theme == 'dark'
-                        ? appSetting.dark_logo_url
+                        ? appSetting.light_logo_url
                         : appSetting.light_logo_url
                 "
             />

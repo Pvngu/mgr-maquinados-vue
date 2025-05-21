@@ -166,21 +166,7 @@
                                                                 {{ $t("common.view") }}
                                                             </a-checkbox>
                                                         </label>
-                                                        <label
-                                                            class="form-check form-check-custom me-5 me-lg-20"
-                                                        >
-                                                            <a-checkbox
-                                                                :value="
-                                                                    permissions[
-                                                                        'email_templates_view_all'
-                                                                    ]
-                                                                "
-                                                            >
-                                                                {{
-                                                                    $t("common.view_all")
-                                                                }}
-                                                            </a-checkbox>
-                                                        </label>
+                                                        <!-- Removed email_templates_view_all (not in PermsSeed) -->
                                                         <label
                                                             class="form-check form-check-custom me-5 me-lg-20"
                                                         >
@@ -243,21 +229,7 @@
                                                                 {{ $t("common.view") }}
                                                             </a-checkbox>
                                                         </label>
-                                                        <label
-                                                            class="form-check form-check-custom me-5 me-lg-20"
-                                                        >
-                                                            <a-checkbox
-                                                                :value="
-                                                                    permissions[
-                                                                        'forms_view_all'
-                                                                    ]
-                                                                "
-                                                            >
-                                                                {{
-                                                                    $t("common.view_all")
-                                                                }}
-                                                            </a-checkbox>
-                                                        </label>
+                                                        <!-- Removed forms_view_all (not in PermsSeed) -->
                                                         <label
                                                             class="form-check form-check-custom me-5 me-lg-20"
                                                         >
@@ -612,6 +584,152 @@
                                                                 "
                                                             >
                                                                 {{ $t("common.edit") }}
+                                                            </a-checkbox>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="text-gray-800">
+                                                    {{ $t("menu.categories") }}
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <label class="form-check form-check-custom me-5 me-lg-20">
+                                                            <a-checkbox :value="permissions['categories_view']">
+                                                                {{ $t("common.view") }}
+                                                            </a-checkbox>
+                                                        </label>
+                                                        <label class="form-check form-check-custom me-5 me-lg-20">
+                                                            <a-checkbox :value="permissions['categories_create']">
+                                                                {{ $t("common.add") }}
+                                                            </a-checkbox>
+                                                        </label>
+                                                        <label class="form-check form-check-custom me-5 me-lg-20">
+                                                            <a-checkbox :value="permissions['categories_edit']">
+                                                                {{ $t("common.edit") }}
+                                                            </a-checkbox>
+                                                        </label>
+                                                        <label class="form-check form-check-custom">
+                                                            <a-checkbox :value="permissions['categories_delete']">
+                                                                {{ $t("common.delete") }}
+                                                            </a-checkbox>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-gray-800">
+                                                    {{ $t("menu.suppliers") }}
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <label class="form-check form-check-custom me-5 me-lg-20">
+                                                            <a-checkbox :value="permissions['suppliers_view']">
+                                                                {{ $t("common.view") }}
+                                                            </a-checkbox>
+                                                        </label>
+                                                        <label class="form-check form-check-custom me-5 me-lg-20">
+                                                            <a-checkbox :value="permissions['suppliers_create']">
+                                                                {{ $t("common.add") }}
+                                                            </a-checkbox>
+                                                        </label>
+                                                        <label class="form-check form-check-custom me-5 me-lg-20">
+                                                            <a-checkbox :value="permissions['suppliers_edit']">
+                                                                {{ $t("common.edit") }}
+                                                            </a-checkbox>
+                                                        </label>
+                                                        <label class="form-check form-check-custom">
+                                                            <a-checkbox :value="permissions['suppliers_delete']">
+                                                                {{ $t("common.delete") }}
+                                                            </a-checkbox>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-gray-800">
+                                                    {{ $t("menu.products") }}
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <label class="form-check form-check-custom me-5 me-lg-20">
+                                                            <a-checkbox :value="permissions['products_view']">
+                                                                {{ $t("common.view") }}
+                                                            </a-checkbox>
+                                                        </label>
+                                                        <label class="form-check form-check-custom me-5 me-lg-20">
+                                                            <a-checkbox :value="permissions['products_create']">
+                                                                {{ $t("common.add") }}
+                                                            </a-checkbox>
+                                                        </label>
+                                                        <label class="form-check form-check-custom me-5 me-lg-20">
+                                                            <a-checkbox :value="permissions['products_edit']">
+                                                                {{ $t("common.edit") }}
+                                                            </a-checkbox>
+                                                        </label>
+                                                        <label class="form-check form-check-custom">
+                                                            <a-checkbox :value="permissions['products_delete']">
+                                                                {{ $t("common.delete") }}
+                                                            </a-checkbox>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-gray-800">
+                                                    {{ $t("menu.clients") }}
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <label class="form-check form-check-custom me-5 me-lg-20">
+                                                            <a-checkbox :value="permissions['clients_view']">
+                                                                {{ $t("common.view") }}
+                                                            </a-checkbox>
+                                                        </label>
+                                                        <label class="form-check form-check-custom me-5 me-lg-20">
+                                                            <a-checkbox :value="permissions['clients_create']">
+                                                                {{ $t("common.add") }}
+                                                            </a-checkbox>
+                                                        </label>
+                                                        <label class="form-check form-check-custom me-5 me-lg-20">
+                                                            <a-checkbox :value="permissions['clients_edit']">
+                                                                {{ $t("common.edit") }}
+                                                            </a-checkbox>
+                                                        </label>
+                                                        <label class="form-check form-check-custom">
+                                                            <a-checkbox :value="permissions['clients_delete']">
+                                                                {{ $t("common.delete") }}
+                                                            </a-checkbox>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-gray-800">
+                                                    {{ $t("menu.orders") }}
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <label class="form-check form-check-custom me-5 me-lg-20">
+                                                            <a-checkbox :value="permissions['orders_view']">
+                                                                {{ $t("common.view") }}
+                                                            </a-checkbox>
+                                                        </label>
+                                                        <label class="form-check form-check-custom me-5 me-lg-20">
+                                                            <a-checkbox :value="permissions['orders_create']">
+                                                                {{ $t("common.add") }}
+                                                            </a-checkbox>
+                                                        </label>
+                                                        <label class="form-check form-check-custom me-5 me-lg-20">
+                                                            <a-checkbox :value="permissions['orders_edit']">
+                                                                {{ $t("common.edit") }}
+                                                            </a-checkbox>
+                                                        </label>
+                                                        <label class="form-check form-check-custom">
+                                                            <a-checkbox :value="permissions['orders_delete']">
+                                                                {{ $t("common.delete") }}
                                                             </a-checkbox>
                                                         </label>
                                                     </div>
