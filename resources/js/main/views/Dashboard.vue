@@ -87,7 +87,12 @@
         <a-row :gutter="[18, 18]" class="mt-30 mb-20">
             <a-col :xs="24" :sm="24" :md="12" :lg="16" :xl="16">
                 <a-card :title="$t('dashboard.sales_chart')" :bordered="false">
-                    <div id="sales-chart" style="height: 350px"></div>
+                    <div style="height: 350px">
+                        <Line 
+                            :data="chartData" 
+                            :options="chartOptions" 
+                        />
+                    </div>
                 </a-card>
             </a-col>
 
@@ -157,6 +162,11 @@ import common from "../../common/composable/common";
 import AdminPageHeader from "../../common/layouts/AdminPageHeader.vue";
 import StateWidget from "../../common/components/common/card/StateWidget.vue";
 import DateRangePicker from "../../common/components/common/calendar/DateRangePicker.vue";
+import { Line } from 'vue-chart-3';
+import { Chart, registerables } from 'chart.js';
+
+// Register Chart.js components
+Chart.register(...registerables);
 
 export default {
     components: {
@@ -169,6 +179,7 @@ export default {
         AppstoreOutlined,
         EyeOutlined,
         AlertOutlined,
+        Line,
     },
     setup() {
         const { formatTimeDuration } = common();
@@ -179,7 +190,46 @@ export default {
             dates: [],
         });
         const loading = ref(false);
-        let salesChart = null;
+        const chartData = ref({
+            labels: [],
+            datasets: [
+                {
+                    label: 'Sales',
+                    data: [],
+                    backgroundColor: 'rgba(24, 144, 255, 0.2)',
+                    borderColor: '#1890ff',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    fill: true,
+                }
+            ]
+        });
+        const chartOptions = ref({
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return formatCurrency(value, true);
+                        }
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return formatCurrency(context.parsed.y);
+                        }
+                    }
+                },
+                legend: {
+                    display: false
+                }
+            }
+        });
 
         // Order table columns
         const orderColumns = [
@@ -234,15 +284,6 @@ export default {
         const initSalesChart = () => {
             if (!responseData.value.salesByDay) return;
             
-            const chartDom = document.getElementById('sales-chart');
-            if (!chartDom) return;
-            
-            if (salesChart) {
-                salesChart.dispose();
-            }
-            
-            salesChart = echarts.init(chartDom);
-            
             const dates = [];
             const amounts = [];
             
@@ -251,59 +292,10 @@ export default {
                 amounts.push(item.amount);
             });
             
-            const option = {
-                tooltip: {
-                    trigger: 'axis',
-                    formatter: function (params) {
-                        const date = params[0].name;
-                        const value = params[0].value;
-                        return `${date}: ${formatCurrency(value)}`;
-                    }
-                },
-                grid: {
-                    left: '3%',
-                    right: '4%',
-                    bottom: '3%',
-                    containLabel: true
-                },
-                xAxis: {
-                    type: 'category',
-                    boundaryGap: false,
-                    data: dates
-                },
-                yAxis: {
-                    type: 'value',
-                    axisLabel: {
-                        formatter: function(value) {
-                            return formatCurrency(value, true);
-                        }
-                    }
-                },
-                series: [
-                    {
-                        name: t('dashboard.sales'),
-                        type: 'line',
-                        stack: 'Total',
-                        data: amounts,
-                        areaStyle: {},
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        itemStyle: {
-                            color: '#1890ff'
-                        },
-                        lineStyle: {
-                            width: 3
-                        }
-                    }
-                ]
-            };
-            
-            salesChart.setOption(option);
-            
-            window.addEventListener('resize', function() {
-                salesChart.resize();
-            });
+            // Update chart data
+            chartData.value.labels = dates;
+            chartData.value.datasets[0].data = amounts;
+            chartData.value.datasets[0].label = t('dashboard.sales');
         };
 
         const formatCurrency = (amount, abbreviated = false) => {
@@ -342,7 +334,9 @@ export default {
             responseData,
             loading,
             orderColumns,
-            viewOrder
+            viewOrder,
+            chartData,
+            chartOptions
         };
     },
 };
@@ -356,5 +350,11 @@ export default {
 
 .ant-card-head-title {
     margin-top: 10px;
+}
+
+/* Make sure the chart container works properly with Chart.js */
+canvas {
+    max-width: 100%;
+    height: 100% !important;
 }
 </style>

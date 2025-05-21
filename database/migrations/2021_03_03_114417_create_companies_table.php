@@ -38,7 +38,7 @@ class CreateCompaniesTable extends Migration
             $table->boolean('auto_detect_timezone')->default(true); // Allow Browser To Auto Detect timezone For Logged In User
             $table->string('timezone')->default("America/Los_Angeles");
             $table->string('session_driver', 20)->default("file");
-            $table->boolean('app_debug')->default(false);
+            $table->boolean('app_debug')->default(true);
             $table->boolean('update_app_notification')->default(true);
             $table->string('login_image')->nullable()->default(NULL);
             $table->boolean('rtl')->default(false);

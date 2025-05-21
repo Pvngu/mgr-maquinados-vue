@@ -385,7 +385,7 @@ class AuthController extends ApiBaseController
 
         if ($mode == 'dark') {
             $company = company();
-            $company->left_sidebar_theme = 'dark';
+            $company->left_sidebar_theme = 'light';
             $company->save();
 
             $updatedCompany = company(true);
