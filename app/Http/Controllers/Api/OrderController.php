@@ -10,7 +10,6 @@ use App\Http\Requests\Api\Order\StoreRequest;
 use App\Http\Requests\Api\Order\UpdateRequest;
 use App\Http\Requests\Api\Order\DeleteRequest;
 use Illuminate\Support\Facades\DB;
-use Vinkla\Hashids\Facades\Hashids;
 
 class OrderController extends ApiBaseController
 {

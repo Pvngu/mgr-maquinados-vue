@@ -2,9 +2,9 @@
     <a-date-picker
         v-model:value="dateTimeValue"
         :format="props.onlyDate ? formatOrderDate : formatOrderDateTime"
-        :disabled-date="isFutureDateDisabled ? disabledDate : undefined"
+        :disabled-date="isFutureDateDisabled ? disabledDate : (isPastDateDisabled ? disabledPastDate : undefined)"
         :show-time="props.showTime"
-        :placeholder="$t('common.date_time')"
+        :placeholder="onlyDate ? $t('common.date') : $t('common.date_time')"
         style="width: 100%"
         @change="dateTimeChanged"
         :disabled="disabled"
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { defineComponent, onMounted, ref } from "vue";
+import { defineComponent, onMounted, ref, watch } from "vue";
 import common from "../../../composable/common";
 
 export default defineComponent({
@@ -24,7 +24,10 @@ export default defineComponent({
             default: false,
         },
         isFutureDateDisabled: {
-            default: true,
+            default: false,
+        },
+        isPastDateDisabled: {
+            default: false,
         },
         showTime: {
             default: true,
@@ -36,7 +39,7 @@ export default defineComponent({
     emits: ["dateTimeChanged"],
     setup(props, { emit }) {
         const dateTimeValue = ref(undefined);
-        const { disabledDate, formatDateTime,formatDate, dayjs } = common();
+        const { disabledDate, disabledPastDate, formatDateTime,formatDate, dayjs, appSetting } = common();
 
         onMounted(() => {
             if (props.dateTime) {
@@ -54,21 +57,31 @@ export default defineComponent({
 
         const dateTimeChanged = (newValue) => {
             const emitValue = newValue
-                ? newValue.utc().format("YYYY-MM-DDTHH:mm:ssZ")
+                ? newValue.tz(appSetting.value.timezone).format("YYYY-MM-DDTHH:mm:ssZ")
                 : undefined;
             emit("dateTimeChanged", emitValue);
         };
 
+        watch(
+            () => props.dateTime,
+            (newValue) => {
+                if (newValue) {
+                    dateTimeValue.value = dayjs(newValue);
+                } else {
+                    dateTimeValue.value = undefined;
+                }
+            }
+        );
+
         return {
             dateTimeValue,
             disabledDate,
+            disabledPastDate,
             formatOrderDate,
             formatOrderDateTime,
             dateTimeChanged,
-            props
+            props,
         };
     },
 });
 </script>
-
-<style></style>

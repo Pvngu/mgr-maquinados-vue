@@ -80,7 +80,6 @@
                             >
                                 <PhoneInput
                                     v-model="formData.contact_phone"
-                                    :disabled="false"
                                 />
                             </a-form-item>
                         </a-col>
@@ -336,6 +335,7 @@ export default defineComponent({
 
         // Handle form submission
         const onSubmit = () => {
+            rules.value = {};
             addEditRequestAdmin({
                 url: props.url + (props.addEditType === "add" ? "" : `/${props.formData.xid}`),
                 data: props.formData,
