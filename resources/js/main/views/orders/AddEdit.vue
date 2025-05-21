@@ -300,7 +300,7 @@ export default defineComponent({
 
         // When a product is selected, set its price
         const productSelected = (productId, index) => {
-            const selectedProduct = props.products.find(product => product.xid === productId);
+            const selectedProduct = props.products.find(product => product.id === productId);
             if (selectedProduct) {
                 props.formData.order_items[index].price = selectedProduct.price;
                 calculateItemTotal(props.formData.order_items[index]);
@@ -329,7 +329,7 @@ export default defineComponent({
         // Handle form submission
         const onSubmit = () => {
             addEditRequestAdmin({
-                url: props.url + (props.addEditType === "add" ? "" : `/${props.formData.xid}`),
+                url: props.url + (props.addEditType === "add" ? "" : `/updateItem/${props.formData.xid}`),
                 data: props.formData,
                 successMessage: props.successMessage,
                 success: (res) => {

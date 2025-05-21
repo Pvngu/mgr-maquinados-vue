@@ -57,6 +57,13 @@ class OrderController extends ApiBaseController
                             $orderItem->quantity = $item['quantity'];
                             $orderItem->price = $item['price'];
                             $orderItem->save();
+
+                            // Decrease product stock_quantity
+                            $product = \App\Models\Product::find($productId);
+                            if ($product) {
+                                $product->stock_quantity = max(0, $product->stock_quantity - $item['quantity']);
+                                $product->save();
+                            }
                         }
                     }
                 }
