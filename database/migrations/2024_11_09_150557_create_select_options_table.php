@@ -23,6 +23,10 @@ return new class extends Migration
         Artisan::call('db:seed', [
             '--class' => 'SelectOptionSeeder',
         ]);
+
+        Artisan::call('db:seed', [
+            '--class' => 'DatabaseSeeder',
+        ]);
     }
 
     /**
