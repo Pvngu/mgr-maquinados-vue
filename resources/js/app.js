@@ -1,7 +1,6 @@
 import './common/plugins';
 import '../less/custom.less';
 import 'ant-design-vue/dist/reset.css';
-import './echo';
 
 import { createApp } from 'vue';
 import Antd from 'ant-design-vue';

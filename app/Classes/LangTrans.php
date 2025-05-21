@@ -150,6 +150,17 @@ class LangTrans
         ],
         'dashboard' => [
             'dashboard' => 'Tablero',
+            'recent_orders' => 'Pedidos recientes',
+            'order_id' => 'ID del pedido',
+            'client' => 'Cliente',
+            'amount' => 'Cantidad',
+            'date' => 'Fecha',
+            'total_orders' => 'Total de pedidos',
+            'total_revenue' => 'Ingresos totales',
+            'total_clients' => 'Total de clientes',
+            'total_products' => 'Total de productos',
+            'sales_chart' => 'Gráfico de ventas',
+            'stock_alert' => 'Alerta de stock',
         ],
         'user' => [
             'staff_members' => 'Miembros del personal',

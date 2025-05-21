@@ -6,6 +6,9 @@ use Carbon\Carbon;
 use App\Models\Form;
 use App\Models\Lang;
 use App\Models\User;
+use App\Models\Order;
+use App\Models\Client;
+use App\Models\Product;
 use App\Classes\Common;
 use App\Models\Company;
 use App\Models\Currency;
@@ -307,18 +310,70 @@ class AuthController extends ApiBaseController
     public function dashboard(Request $request)
     {
         $user = user();
-
+        $query = [];
+        
         if ($request->has('dates') && $request->dates != null && count($request->dates) > 0) {
             $dates = $request->dates;
             $startDate = $dates[0];
             $endDate = $dates[1];
-
-            // whereRaw('DATE(individuals.updated_at) >= ?', [$startDate])
-            //     ->whereRaw('DATE(individuals.updated_at) <= ?', [$endDate]);
+            
+            $query['startDate'] = $startDate;
+            $query['endDate'] = $endDate;
+        } else {
+            $query['startDate'] = date('Y-m-d', strtotime('-30 days'));
+            $query['endDate'] = date('Y-m-d');
+        }
+        
+        // Total Orders
+        $totalOrders = Order::when(isset($query['startDate']), function ($q) use ($query) {
+                return $q->whereDate('order_date', '>=', $query['startDate'])
+                    ->whereDate('order_date', '<=', $query['endDate']);
+            })->count();
+            
+        // Total Revenue
+        $totalRevenue = Order::when(isset($query['startDate']), function ($q) use ($query) {
+                return $q->whereDate('order_date', '>=', $query['startDate'])
+                    ->whereDate('order_date', '<=', $query['endDate']);
+            })->sum('total_amount');
+            
+        // Total Clients
+        $totalClients = Client::count();
+        
+        // Total Products
+        $totalProducts = Product::count();
+        
+        // Products with low stock
+        $lowStockProducts = Product::where('stock_quantity', '<=', 5)->count();
+        
+        // Recent Orders
+        $recentOrders = Order::with('client')
+            ->orderBy('order_date', 'desc')
+            ->limit(5)
+            ->get();
+            
+        // Sales by day for chart
+        $salesByDay = [];
+        if (isset($query['startDate'])) {
+            $period = CarbonPeriod::create($query['startDate'], $query['endDate']);
+            
+            foreach ($period as $date) {
+                $dateStr = $date->format('Y-m-d');
+                $sales = Order::whereDate('order_date', $dateStr)->sum('total_amount');
+                $salesByDay[] = [
+                    'date' => $dateStr,
+                    'amount' => $sales
+                ];
+            }
         }
 
-
         return ApiResponse::make('Data fetched', [
+            'totalOrders' => $totalOrders,
+            'totalRevenue' => $totalRevenue,
+            'totalClients' => $totalClients,
+            'totalProducts' => $totalProducts,
+            'lowStockProducts' => $lowStockProducts,
+            'recentOrders' => $recentOrders,
+            'salesByDay' => $salesByDay,
         ]);
     }
 
