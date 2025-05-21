@@ -13,6 +13,8 @@ class Client extends BaseModel
 
     protected $hidden = ['id'];
 
+    protected $default = ['name', 'email', 'phone', 'address'];
+
     protected $appends = ['xid'];
 
     protected $filterable = [];

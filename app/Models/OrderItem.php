@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\Hash;
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -10,8 +11,6 @@ class OrderItem extends BaseModel
     use HasFactory;
 
     protected $table = 'order_items';
-
-    protected $hidden = ['order_id', 'product_id'];
 
     protected $appends = ['xid', 'x_order_id', 'x_product_id'];
 

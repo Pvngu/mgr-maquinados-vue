@@ -596,6 +596,15 @@ class LangTrans
             'order_date' => 'Fecha del pedido',
             'total_amount' => 'Cantidad total',
             'user_id' => 'Usuario',
+            'order_items' => 'Artículos del pedido',
+            'product' => 'Producto',
+            'quantity' => 'Cantidad',
+            'price' => 'Precio',
+            'subtotal' => 'Subtotal',
+            'add_order_item' => 'Agregar artículo al pedido',
+            'contact_name' => 'Nombre de contacto',
+            'contact_phone' => 'Teléfono de contacto',
+            'contact_email' => 'Correo electrónico de contacto',
         ],
     ];
 

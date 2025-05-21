@@ -58,6 +58,7 @@
             :successMessage="successMessage"
             :customers="customers"
             :users="users"
+            :products="products"
         />
         <a-row class="mt-5">
             <a-col :span="24">
@@ -74,10 +75,13 @@
                     >
                         <template #bodyCell="{ column, record }">
                             <template v-if="column.dataIndex === 'client_id'">
-                                {{ record.client.name }}
+                                {{ record.client ? record.client.name : '' }}
                             </template>
                             <template v-if="column.dataIndex === 'user_id'">
-                                {{ record.user.name }}
+                                {{ record.user ? record.user.name : '' }}
+                            </template>
+                            <template v-if="column.dataIndex === 'total_amount'">
+                                {{ parseFloat(record.total_amount).toFixed(2) }}
                             </template>
                             <template v-if="column.dataIndex === 'action'">
                                 <a-button
@@ -93,14 +97,13 @@
                                 </a-button>
                                 <a-button
                                     v-if="
-                                        (permsArray.includes('orders_delete') ||
-                                            permsArray.includes('admin')) &&
-                                        (!record.children ||
-                                            record.children.length == 0)
+                                        permsArray.includes('orders_delete') ||
+                                        permsArray.includes('admin')
                                     "
                                     type="primary"
                                     @click="showDeleteConfirm(record.xid)"
                                     style="margin-left: 4px"
+                                    danger
                                 >
                                     <template #icon><DeleteOutlined /></template>
                                 </a-button>
@@ -144,7 +147,8 @@ export default {
             hashableColumns,
             getPrefetchData,
             customers,
-            users
+            users,
+            products
         } = fields();
         const { permsArray } = common();
         const crudVariables = crud();
@@ -159,8 +163,7 @@ export default {
 
             getPrefetchData().then(() => {
                 setUrlData();
-            }
-        )
+            });
         });
 
         const setUrlData = () => {
@@ -175,6 +178,19 @@ export default {
             });
         };
 
+        // Override addItem to initialize order_items array
+        const addItem = () => {
+            crudVariables.addEditType.value = "add";
+            crudVariables.formData.value = { ...crudVariables.initData.value, order_items: [] };
+            crudVariables.addEditVisible.value = true;
+            crudVariables.pageTitle.value = crudVariables.langKey.value
+                ? crudVariables.$t(`${crudVariables.langKey.value}.add`)
+                : crudVariables.$t("common.add");
+            crudVariables.successMessage.value = crudVariables.langKey.value
+                ? crudVariables.$t(`${crudVariables.langKey.value}.created`)
+                : crudVariables.$t("common.created");
+        };
+
         return {
             ...crudVariables,
             permsArray,
@@ -183,6 +199,9 @@ export default {
             setUrlData,
             customers,
             users,
+            products,
+            addItem,
+            addEditUrl
         };
     },
 };

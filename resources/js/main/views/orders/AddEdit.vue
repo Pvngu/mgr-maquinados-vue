@@ -55,19 +55,42 @@
                             </a-form-item>
                         </a-col>
                     </a-row>
+                    
+                    <!-- Contact Information -->
                     <a-row :gutter="16">
                         <a-col :xs="24" :sm="24" :md="12" :lg="12">
                             <a-form-item
-                                :label="$t('orders.total_amount')"
-                                name="total_amount"
-                                :help="rules.total_amount ? rules.total_amount.message : null"
-                                :validateStatus="rules.total_amount ? 'error' : null"
-                                class="required"
+                                :label="$t('orders.contact_name')"
+                                name="contact_name"
                             >
-                                <a-input-number
-                                    v-model:value="formData.total_amount"
-                                    :placeholder="$t('common.placeholder_default_text', [$t('orders.total_amount')])"
-                                    style="width: 100%"
+                                <a-input
+                                    v-model:value="formData.contact_name"
+                                    :placeholder="$t('common.placeholder_default_text', [$t('orders.contact_name')])"
+                                />
+                            </a-form-item>
+                        </a-col>
+                        <a-col :xs="24" :sm="24" :md="12" :lg="12">
+                            <a-form-item
+                                :label="$t('orders.contact_phone')"
+                                name="contact_phone"
+                            >
+                                <a-input
+                                    v-model:value="formData.contact_phone"
+                                    :placeholder="$t('common.placeholder_default_text', [$t('orders.contact_phone')])"
+                                />
+                            </a-form-item>
+                        </a-col>
+                    </a-row>
+                    
+                    <a-row :gutter="16">
+                        <a-col :xs="24" :sm="24" :md="12" :lg="12">
+                            <a-form-item
+                                :label="$t('orders.contact_email')"
+                                name="contact_email"
+                            >
+                                <a-input
+                                    v-model:value="formData.contact_email"
+                                    :placeholder="$t('common.placeholder_default_text', [$t('orders.contact_email')])"
                                 />
                             </a-form-item>
                         </a-col>
@@ -97,6 +120,106 @@
                             </a-form-item>
                         </a-col>
                     </a-row>
+                    
+                    <!-- Order Items Section -->
+                    <a-divider orientation="left">{{ $t('orders.order_items') }}</a-divider>
+                    
+                    <a-table
+                        :dataSource="formData.order_items"
+                        :pagination="false"
+                        :bordered="true"
+                        size="middle"
+                    >
+                        <a-table-column key="no" :title="$t('common.no')" align="center" width="60px">
+                            <template #default="{ index }">
+                                {{ index + 1 }}
+                            </template>
+                        </a-table-column>
+                        
+                        <a-table-column key="product_id" :title="$t('orders.product')">
+                            <template #default="{ record, index }">
+                                <a-select
+                                    v-model:value="record.product_id"
+                                    :placeholder="$t('common.select_default_text', [$t('orders.product')])"
+                                    style="width: 100%"
+                                    show-search
+                                    optionFilterProp="title"
+                                    @change="(value) => productSelected(value, index)"
+                                >
+                                    <a-select-option
+                                        v-for="product in products"
+                                        :key="product.id"
+                                        :title="product.name"
+                                        :value="product.id"
+                                    >
+                                        {{ product.name }}
+                                    </a-select-option>
+                                </a-select>
+                            </template>
+                        </a-table-column>
+                        
+                        <a-table-column key="quantity" :title="$t('orders.quantity')" width="120px">
+                            <template #default="{ record }">
+                                <a-input-number
+                                    v-model:value="record.quantity"
+                                    :min="1"
+                                    style="width: 100%"
+                                    @change="calculateItemTotal(record)"
+                                />
+                            </template>
+                        </a-table-column>
+                        
+                        <a-table-column key="price" :title="$t('orders.price')" width="120px">
+                            <template #default="{ record }">
+                                <a-input-number
+                                    v-model:value="record.price"
+                                    :min="0"
+                                    :precision="2"
+                                    style="width: 100%"
+                                    @change="calculateItemTotal(record)"
+                                />
+                            </template>
+                        </a-table-column>
+                        
+                        <a-table-column key="subtotal" :title="$t('orders.subtotal')" align="right" width="120px">
+                            <template #default="{ record }">
+                                {{ formatPrice(record.quantity * record.price) }}
+                            </template>
+                        </a-table-column>
+                        
+                        <a-table-column key="action" :title="$t('common.action')" align="center" width="70px">
+                            <template #default="{ index }">
+                                <a-button
+                                    type="primary"
+                                    danger
+                                    size="small"
+                                    @click="removeOrderItem(index)"
+                                >
+                                    <template #icon><DeleteOutlined /></template>
+                                </a-button>
+                            </template>
+                        </a-table-column>
+                    </a-table>
+                    
+                    <a-row class="mt-20">
+                        <a-col :span="24">
+                            <a-button type="dashed" block @click="addOrderItem">
+                                <template #icon><PlusOutlined /></template>
+                                {{ $t('orders.add_order_item') }}
+                            </a-button>
+                        </a-col>
+                    </a-row>
+                    
+                    <!-- Order Total -->
+                    <a-row :gutter="16" class="mt-20" justify="end">
+                        <a-col :xs="24" :sm="24" :md="8" :lg="6">
+                            <a-statistic
+                                :title="$t('orders.total_amount')"
+                                :value="formatPrice(formData.total_amount)"
+                                style="text-align: right;"
+                            />
+                        </a-col>
+                    </a-row>
                 </a-col>
             </a-row>
         </a-form>
@@ -122,11 +245,12 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, watch } from "vue";
 import {
     PlusOutlined,
     LoadingOutlined,
     SaveOutlined,
+    DeleteOutlined,
 } from "@ant-design/icons-vue";
 import apiAdmin from "../../../common/composable/apiAdmin";
 import DateTimePicker from "../../../common/components/common/calendar/DateTimePicker.vue";
@@ -141,20 +265,71 @@ export default defineComponent({
         "pageTitle",
         "successMessage",
         "customers",
-        "users"
+        "users",
+        "products"
     ],
     components: {
         PlusOutlined,
         LoadingOutlined,
         SaveOutlined,
+        DeleteOutlined,
         DateTimePicker,
     },
     setup(props, { emit }) {
         const { addEditRequestAdmin, loading, rules } = apiAdmin();
 
+        // Format price with 2 decimal places
+        const formatPrice = (price) => {
+            return parseFloat(price).toFixed(2);
+        };
+
+        // Add a new order item
+        const addOrderItem = () => {
+            props.formData.order_items.push({
+                product_id: undefined,
+                quantity: 1,
+                price: 0
+            });
+        };
+
+        // Remove an order item
+        const removeOrderItem = (index) => {
+            props.formData.order_items.splice(index, 1);
+            calculateOrderTotal();
+        };
+
+        // When a product is selected, set its price
+        const productSelected = (productId, index) => {
+            const selectedProduct = props.products.find(product => product.xid === productId);
+            if (selectedProduct) {
+                props.formData.order_items[index].price = selectedProduct.price;
+                calculateItemTotal(props.formData.order_items[index]);
+            }
+        };
+
+        // Calculate the total for an individual item
+        const calculateItemTotal = (item) => {
+            calculateOrderTotal();
+        };
+
+        // Calculate the total amount for the entire order
+        const calculateOrderTotal = () => {
+            let total = 0;
+            props.formData.order_items.forEach(item => {
+                total += item.quantity * item.price;
+            });
+            props.formData.total_amount = total;
+        };
+
+        // Watch for changes to order items and recalculate total
+        watch(() => props.formData.order_items, () => {
+            calculateOrderTotal();
+        }, { deep: true });
+
+        // Handle form submission
         const onSubmit = () => {
             addEditRequestAdmin({
-                url: props.url,
+                url: props.url + (props.addEditType === "add" ? "" : `/${props.formData.xid}`),
                 data: props.formData,
                 successMessage: props.successMessage,
                 success: (res) => {
@@ -173,8 +348,20 @@ export default defineComponent({
             rules,
             onClose,
             onSubmit,
-            drawerWidth: window.innerWidth <= 991 ? "90%" : "40%",
+            addOrderItem,
+            removeOrderItem,
+            productSelected,
+            calculateItemTotal,
+            calculateOrderTotal,
+            formatPrice,
+            drawerWidth: window.innerWidth <= 991 ? "90%" : "60%",
         };
     },
 });
 </script>
+
+<style scoped>
+.mt-20 {
+    margin-top: 20px;
+}
+</style>

@@ -12,7 +12,7 @@ class Product extends BaseModel
 
     protected $table = 'products';
 
-    protected $hidden = ['id', 'category_id'];
+    protected $hidden = ['category_id'];
 
     protected $appends = ['xid', 'x_category_id'];
 

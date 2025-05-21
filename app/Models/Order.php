@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\Hash;
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -15,6 +16,11 @@ class Order extends BaseModel
 
     protected $appends = ['xid', 'x_client_id', 'x_user_id'];
 
+    protected $fillable = [
+        'client_id', 'order_date', 'total_amount', 'user_id',
+        'contact_name', 'contact_email', 'contact_phone',
+    ];
+
     protected $filterable = [];
 
     protected $hashableGetterFunctions = [
@@ -25,6 +31,8 @@ class Order extends BaseModel
     protected $casts = [
         'client_id' => Hash::class . ':hash',
         'user_id' => Hash::class . ':hash',
+        'order_date' => 'date',
+        'total_amount' => 'float',
     ];
 
     protected static function boot()
@@ -40,5 +48,10 @@ class Order extends BaseModel
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
     }
 }

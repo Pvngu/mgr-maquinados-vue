@@ -14,6 +14,9 @@ class CreateOrdersTable extends Migration
             $table->date('order_date');
             $table->decimal('total_amount', 10, 2);
             $table->foreignId('user_id')->constrained('users');
+            $table->string('contact_name')->nullable();
+            $table->string('contact_email')->nullable();
+            $table->string('contact_phone')->nullable();
             $table->timestamps();
         });
     }
