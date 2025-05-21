@@ -12,7 +12,7 @@ class Order extends BaseModel
 
     protected $table = 'orders';
 
-    protected $hidden = ['id', 'client_id', 'user_id'];
+    protected $hidden = ['client_id', 'user_id'];
 
     protected $default = [
         'client_id', 'order_date', 'total_amount', 'user_id',

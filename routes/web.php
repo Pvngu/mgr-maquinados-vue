@@ -89,6 +89,7 @@ ApiRoute::group(['namespace' => 'App\Http\Controllers\Api'], function () {
         ApiRoute::resource('suppliers', SupplierController::class, $options);
         ApiRoute::resource('products', ProductController::class, $options);
         ApiRoute::resource('clients', ClientController::class, $options);
+        ApiRoute::get('orders/{id}/export-pdf', ['as' => 'api.orders.export-pdf', 'uses' => 'OrderController@exportPdf']);
         ApiRoute::resource('orders', OrderController::class, $options);
         ApiRoute::resource('order_items', OrderItemController::class, $options);
     });

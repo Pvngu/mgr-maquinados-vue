@@ -10,6 +10,8 @@ use App\Http\Requests\Api\Order\StoreRequest;
 use App\Http\Requests\Api\Order\UpdateRequest;
 use App\Http\Requests\Api\Order\DeleteRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class OrderController extends ApiBaseController
 {
@@ -33,9 +35,7 @@ class OrderController extends ApiBaseController
     public function updated($order)
     {
         return $this->saveOrderItems($order);
-    }
-
-    private function saveOrderItems($order)
+    }    private function saveOrderItems($order)
     {
         try {
             DB::beginTransaction();
@@ -48,7 +48,6 @@ class OrderController extends ApiBaseController
                 foreach (request()->order_items as $item) {
                     if (isset($item['product_id']) && isset($item['quantity']) && isset($item['price'])) {
                         $productId = $item['product_id'];
-
                         if ($productId) {
                             $orderItem = new OrderItem();
                             $orderItem->order_id = $order->id;
@@ -74,5 +73,33 @@ class OrderController extends ApiBaseController
             DB::rollBack();
             throw $e;
         }
+    }
+    
+    public function exportPdf($id)
+    {
+        // Get ID from hash
+        $id = $this->getIdFromHash($id);
+        
+        // Get order with related data
+        $order = Order::with(['client', 'user', 'orderItems.product'])->find($id);
+        
+        if (!$order) {
+            return response()->json(['error' => 'Order not found'], 404);
+        }
+        
+        $data = [
+            'order' => $order,
+            'date' => date('d/m/Y'),
+            'orderItems' => $order->orderItems,
+        ];
+        
+        // Generate PDF
+        $pdf = PDF::loadView('pdf_templates.order', $data);
+        
+        // Set PDF options if needed
+        $pdf->setPaper('letter', 'portrait');
+        
+        // Return PDF for download
+        return $pdf->download('order_' . $order->id . '.pdf');
     }
 }

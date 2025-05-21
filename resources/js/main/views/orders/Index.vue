@@ -96,6 +96,14 @@
                                     <template #icon><EditOutlined /></template>
                                 </a-button>
                                 <a-button
+                                    v-if="permsArray.includes('orders_view') || permsArray.includes('admin')"
+                                    type="primary"
+                                    @click="exportPdfOrder(record.xid)"
+                                    style="margin-left: 4px"
+                                >
+                                    <template #icon><FilePdfOutlined /></template>
+                                </a-button>
+                                <a-button
                                     v-if="
                                         permsArray.includes('orders_delete') ||
                                         permsArray.includes('admin')
@@ -123,6 +131,7 @@ import {
     PlusOutlined,
     DeleteOutlined,
     EditOutlined,
+    FilePdfOutlined,
 } from "@ant-design/icons-vue";
 import crud from "../../../common/composable/crud";
 import common from "../../../common/composable/common";
@@ -134,6 +143,7 @@ export default {
         PlusOutlined,
         DeleteOutlined,
         EditOutlined,
+        FilePdfOutlined,
         AdminPageHeader,
         AddEdit,
     },
@@ -191,6 +201,19 @@ export default {
                 : crudVariables.$t("common.created");
         };
 
+        // PDF export function
+        const exportPdfOrder = async (orderXid) => {
+            try {
+            const response = await axiosAdmin.get(`orders/${orderXid}/export-pdf`, {
+                responseType: 'blob'
+            });
+            const url = window.URL.createObjectURL(new Blob([response], { type: 'application/pdf' }));
+            window.open(url, '_blank');
+            } catch (error) {
+            // handle error if needed
+            }
+        };
+
         return {
             ...crudVariables,
             permsArray,
@@ -201,7 +224,8 @@ export default {
             users,
             products,
             addItem,
-            addEditUrl
+            addEditUrl,
+            exportPdfOrder
         };
     },
 };

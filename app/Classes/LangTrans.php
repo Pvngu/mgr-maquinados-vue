@@ -616,6 +616,7 @@ class LangTrans
             'contact_name' => 'Nombre de contacto',
             'contact_phone' => 'Teléfono de contacto',
             'contact_email' => 'Correo electrónico de contacto',
+            'export_pdf' => 'Exportar a PDF',
         ],
     ];
 

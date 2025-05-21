@@ -84,7 +84,7 @@
         </div>
 
         <!-- Charts and Tables -->
-        <a-row :gutter="[18, 18]" class="mt-30 mb-20">
+        <!-- <a-row :gutter="[18, 18]" class="mt-30 mb-20">
             <a-col :xs="24" :sm="24" :md="12" :lg="16" :xl="16">
                 <a-card :title="$t('dashboard.sales_chart')" :bordered="false">
                     <div style="height: 350px">
@@ -110,7 +110,7 @@
                     </div>
                 </a-card>
             </a-col>
-        </a-row>
+        </a-row> -->
 
         <!-- Recent Orders -->
         <a-row :gutter="[18, 18]" class="mt-20 mb-20">
@@ -133,9 +133,12 @@
                                 {{ formatDate(record.order_date) }}
                             </template>
                             <template v-else-if="column.key === 'action'">
-                                <a-button type="primary" size="small" @click="viewOrder(record)">
-                                    <EyeOutlined />
-                                    {{ $t('common.view') }}
+                                <a-button
+                                    type="primary"
+                                    @click="exportPdfOrder(record.xid)"
+                                    style="margin-left: 4px"
+                                >
+                                    <template #icon><FilePdfOutlined /></template>
                                 </a-button>
                             </template>
                         </template>
@@ -155,6 +158,7 @@ import {
     AppstoreOutlined,
     EyeOutlined,
     AlertOutlined,
+    FilePdfOutlined
 } from "@ant-design/icons-vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from 'vue-router';
@@ -179,6 +183,7 @@ export default {
         AppstoreOutlined,
         EyeOutlined,
         AlertOutlined,
+        FilePdfOutlined,
         Line,
     },
     setup() {
@@ -235,7 +240,7 @@ export default {
         const orderColumns = [
             {
                 title: t('dashboard.order_id'),
-                dataIndex: 'xid',
+                dataIndex: 'id',
                 key: 'id',
                 sorter: true,
             },
@@ -322,6 +327,19 @@ export default {
             }
         };
 
+        // PDF export function
+        const exportPdfOrder = async (orderXid) => {
+            try {
+            const response = await axiosAdmin.get(`orders/${orderXid}/export-pdf`, {
+                responseType: 'blob'
+            });
+            const url = window.URL.createObjectURL(new Blob([response], { type: 'application/pdf' }));
+            window.open(url, '_blank');
+            } catch (error) {
+            // handle error if needed
+            }
+        };
+
         watch([filters], (newVal, oldVal) => {
             getInitData();
         });
@@ -336,7 +354,8 @@ export default {
             orderColumns,
             viewOrder,
             chartData,
-            chartOptions
+            chartOptions,
+            exportPdfOrder,
         };
     },
 };
