@@ -16,7 +16,7 @@
                             <a-form-item
                                 :label="$t('orders.client_id')"
                                 name="client_id"
-                                :help="rules.client_id ? rules.client_id.message : null"
+                                :help="rules.clienft_id ? rules.client_id.message : null"
                                 :validateStatus="rules.client_id ? 'error' : null"
                                 class="required"
                             >
@@ -62,6 +62,8 @@
                             <a-form-item
                                 :label="$t('orders.contact_name')"
                                 name="contact_name"
+                                :help="rules.contact_name ? rules.contact_name.message : null"
+                                :validateStatus="rules.contact_name ? 'error' : null"
                             >
                                 <a-input
                                     v-model:value="formData.contact_name"
@@ -73,10 +75,12 @@
                             <a-form-item
                                 :label="$t('orders.contact_phone')"
                                 name="contact_phone"
+                                :help="rules.contact_phone ? rules.contact_phone.message : null"
+                                :validateStatus="rules.contact_phone ? 'error' : null"
                             >
-                                <a-input
-                                    v-model:value="formData.contact_phone"
-                                    :placeholder="$t('common.placeholder_default_text', [$t('orders.contact_phone')])"
+                                <PhoneInput
+                                    v-model="formData.contact_phone"
+                                    :disabled="false"
                                 />
                             </a-form-item>
                         </a-col>
@@ -87,6 +91,8 @@
                             <a-form-item
                                 :label="$t('orders.contact_email')"
                                 name="contact_email"
+                                :help="rules.contact_email ? rules.contact_email.message : null"
+                                :validateStatus="rules.contact_email ? 'error' : null"
                             >
                                 <a-input
                                     v-model:value="formData.contact_email"
@@ -254,6 +260,7 @@ import {
 } from "@ant-design/icons-vue";
 import apiAdmin from "../../../common/composable/apiAdmin";
 import DateTimePicker from "../../../common/components/common/calendar/DateTimePicker.vue";
+import PhoneInput from "../../../common/components/common/input/PhoneInput.vue";
 
 export default defineComponent({
     props: [
@@ -274,6 +281,7 @@ export default defineComponent({
         SaveOutlined,
         DeleteOutlined,
         DateTimePicker,
+        PhoneInput,
     },
     setup(props, { emit }) {
         const { addEditRequestAdmin, loading, rules } = apiAdmin();

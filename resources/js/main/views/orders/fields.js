@@ -2,7 +2,7 @@ import { useI18n } from "vue-i18n";
 import { ref } from "vue";
 
 const fields = () => {
-const url = "orders?fields=id,xid,client_id,x_client_id,order_date,total_amount,contact_name,contact_email,contact_phone,user_id,x_user_id,client,user,orderItems{order_id,product_id,quantity,price}";
+const url = "orders?fields=id,xid,client_id,x_client_id,order_date,total_amount,contact_name,contact_email,contact_phone,user_id,x_user_id,client,user,orderItems{order_id,product_id,quantity,price},orderItems:product,orderItems:order";
     const addEditUrl = "orders";
     const { t } = useI18n();
     const hashableColumns = ["client_id", "user_id"];

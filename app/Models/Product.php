@@ -12,6 +12,8 @@ class Product extends BaseModel
 
     protected $table = 'products';
 
+    protected $default = ['name', 'description', 'price', 'stock_quantity'];
+
     protected $hidden = ['category_id'];
 
     protected $appends = ['xid', 'x_category_id'];

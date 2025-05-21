@@ -20,7 +20,7 @@ class UpdateRequest extends BaseRequest
             'user_id' => 'required',
             'contact_name' => 'nullable|string|max:255',
             'contact_email' => 'nullable|email|max:255',
-            'contact_phone' => 'nullable|string|max:20',
+            'contact_phone' => 'nullable|string|max:16|regex:/^\+?[0-9\s\-()]{7,20}$/',
             'order_items' => 'nullable|array',
             'order_items.*.product_id' => 'required_with:order_items',
             'order_items.*.quantity' => 'required_with:order_items|integer|min:1',

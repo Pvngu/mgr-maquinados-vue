@@ -14,6 +14,11 @@ class Order extends BaseModel
 
     protected $hidden = ['id', 'client_id', 'user_id'];
 
+    protected $default = [
+        'client_id', 'order_date', 'total_amount', 'user_id',
+        'contact_name', 'contact_email', 'contact_phone',
+    ];
+
     protected $appends = ['xid', 'x_client_id', 'x_user_id'];
 
     protected $fillable = [
