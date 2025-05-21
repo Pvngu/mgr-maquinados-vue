@@ -62,9 +62,8 @@
                                 :help="rules.contact_phone ? rules.contact_phone.message : null"
                                 :validateStatus="rules.contact_phone ? 'error' : null"
                             >
-                                <a-input
-                                    v-model:value="formData.contact_phone"
-                                    :placeholder="$t('common.placeholder_default_text', [$t('suppliers.contact_phone')])"
+                                <PhoneInput
+                                    v-model="formData.contact_phone"
                                 />
                             </a-form-item>
                         </a-col>
@@ -100,6 +99,7 @@ import {
     LoadingOutlined,
     SaveOutlined,
 } from "@ant-design/icons-vue";
+import PhoneInput from "../../../common/components/common/input/PhoneInput.vue";
 import apiAdmin from "../../../common/composable/apiAdmin";
 
 export default defineComponent({
@@ -116,6 +116,7 @@ export default defineComponent({
         PlusOutlined,
         LoadingOutlined,
         SaveOutlined,
+        PhoneInput,
     },
     setup(props, { emit }) {
         const { addEditRequestAdmin, loading, rules } = apiAdmin();

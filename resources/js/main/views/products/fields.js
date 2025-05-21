@@ -19,7 +19,7 @@ const fields = () => {
     const categories = ref([]);
 
     const getPrefetchData = () => {
-        const categoryPromise = axiosAdmin.get("categories?fields=id,xid,name");
+        const categoryPromise = axiosAdmin.get("categories?fields=id,xid,name&limit=1000");
         return Promise.all([categoryPromise]).then(([categoryResponse]) => {
             categories.value = categoryResponse.data;
         });
