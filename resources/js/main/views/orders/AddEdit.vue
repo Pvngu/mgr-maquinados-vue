@@ -27,10 +27,10 @@
                                     optionFilterProp="title"
                                 >
                                     <a-select-option
-                                        v-for="client in clients"
-                                        :key="client.id"
+                                        v-for="client in customers"
+                                        :key="client.xid"
                                         :title="client.name"
-                                        :value="client.id"
+                                        :value="client.xid"
                                     >
                                         {{ client.name }}
                                     </a-select-option>
@@ -87,9 +87,9 @@
                                 >
                                     <a-select-option
                                         v-for="user in users"
-                                        :key="user.id"
+                                        :key="user.xid"
                                         :title="user.name"
-                                        :value="user.id"
+                                        :value="user.xid"
                                     >
                                         {{ user.name }}
                                     </a-select-option>
@@ -140,6 +140,8 @@ export default defineComponent({
         "addEditType",
         "pageTitle",
         "successMessage",
+        "customers",
+        "users"
     ],
     components: {
         PlusOutlined,

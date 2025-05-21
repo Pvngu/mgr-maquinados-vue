@@ -14,6 +14,19 @@ const fields = () => {
         user_id: undefined,
     };
 
+    
+    const customers = ref([]);
+    const users = ref([]);
+
+    const getPrefetchData = () => {
+        const clientsPromise = axiosAdmin.get("clients?fields=id,xid,name&limit=1000");
+        const usersPromise = axiosAdmin.get("users?fields=id,xid,name&limit=1000");
+        return Promise.all([clientsPromise, usersPromise]).then(([clientsResponse, usersResponse]) => {
+            customers.value = clientsResponse.data;
+            users.value = usersResponse.data;
+        });
+    };
+
     const columns = [
         {
             title: t("orders.client_id"),
@@ -63,6 +76,9 @@ const fields = () => {
         columns,
         filterableColumns,
         hashableColumns,
+        getPrefetchData,
+        customers,
+        users,
     };
 };
 

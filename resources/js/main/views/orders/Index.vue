@@ -56,6 +56,8 @@
             :data="viewData"
             :pageTitle="pageTitle"
             :successMessage="successMessage"
+            :customers="customers"
+            :users="users"
         />
         <a-row class="mt-5">
             <a-col :span="24">
@@ -112,7 +114,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { onMounted } from "vue";
 import AdminPageHeader from "../../../common/layouts/AdminPageHeader.vue";
 import {
     PlusOutlined,
@@ -140,6 +142,9 @@ export default {
             columns,
             filterableColumns,
             hashableColumns,
+            getPrefetchData,
+            customers,
+            users
         } = fields();
         const { permsArray } = common();
         const crudVariables = crud();
@@ -152,7 +157,10 @@ export default {
             crudVariables.initData.value = { ...initData };
             crudVariables.formData.value = { ...initData };
 
-            setUrlData();
+            getPrefetchData().then(() => {
+                setUrlData();
+            }
+        )
         });
 
         const setUrlData = () => {
@@ -173,6 +181,8 @@ export default {
             columns,
             filterableColumns,
             setUrlData,
+            customers,
+            users,
         };
     },
 };
